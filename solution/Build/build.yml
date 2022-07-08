@@ -1,0 +1,103 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# we need to configured the Docker Connector
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build servian based Application
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        containerRegistry: 'dockerRegistry'
+        repository: 'evila/az-test'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(tag)
+          latest
+          
+- stage: Terraform_init
+  displayName: Terraform servian based Application
+  jobs:
+  - job: Terraform
+    displayName: init_plan_deploy
+    pool:
+      vmImage: windows-2019
+      
+    steps:       
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+
+    - task: TerraformTaskV3@3
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: './solution/Infra'
+        backendServiceArm: 'Azure subscription'
+        backendAzureRmResourceGroupName: 'TechChallengeApp'
+        backendAzureRmStorageAccountName: 'restorestate'
+        backendAzureRmContainerName: 'restorestate'
+        backendAzureRmKey: 'terraform.tfstate'
+        backendAWSBucketName: ''
+        backendAWSKey: ''
+        backendGCPBucketName: ''
+        backendGCPPrefix: ''
+        backendServiceAWS: ''
+        backendServiceGCP: ''
+
+    - task: TerraformTaskV3@3
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: './solution/Infra'
+        commandOptions: -out=tfplan
+        outputTo: 'console'
+        environmentServiceNameAzureRM: 'Azure subscription'
+        backendServiceArm: 'Azure subscription'
+        backendAzureRmResourceGroupName: 'TechChallengeApp'
+        backendAzureRmStorageAccountName: 'restorestate'
+        backendAzureRmContainerName: 'restorestate'
+        backendAzureRmKey: 'terraform.tfstate'
+        backendAWSBucketName: ''
+        backendAWSKey: ''
+        backendGCPBucketName: ''
+        backendGCPPrefix: ''
+        backendServiceAWS: ''
+        backendServiceGCP: ''
+
+    - task: TerraformTaskV3@3
+      inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          workingDirectory: './solution/Infra'
+          commandOptions: tfplan
+          outputTo: 'console'
+          environmentServiceNameAzureRM: 'Azure subscription'
+          backendServiceArm: 'Azure subscription'
+          backendAzureRmResourceGroupName: 'TechChallengeApp'
+          backendAzureRmStorageAccountName: 'restorestate'
+          backendAzureRmContainerName: 'restorestate'
+          backendAzureRmKey: 'terraform.tfstate'
+          backendAWSBucketName: ''
+          backendAWSKey: ''
+          backendGCPBucketName: ''
+          backendGCPPrefix: ''
+          backendServiceAWS: ''
+          backendServiceGCP: '' 
