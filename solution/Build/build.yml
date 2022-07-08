@@ -84,7 +84,7 @@ stages:
         backendServiceGCP: ''
         environmentServiceNameAzureRM: 'Azure subscription'
 
-    - task: Terraform@1
+    - task: Terraform@2
       inputs:
         TemplatePath: './solution/Infra'
         Arguments: 'apply tfplan'
