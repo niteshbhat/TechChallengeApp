@@ -80,6 +80,7 @@ stages:
         backendGCPPrefix: ''
         backendServiceAWS: ''
         backendServiceGCP: ''
+        environmentServiceNameAzureRM: 'Azure subscription'
 
     - task: TerraformTaskV3@3
       inputs:
@@ -98,3 +99,4 @@ stages:
         backendGCPPrefix: ''
         backendServiceAWS: ''
         backendServiceGCP: ''
+        environmentServiceNameAzureRM: 'Azure subscription'
