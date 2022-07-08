@@ -91,5 +91,17 @@ stages:
         workingDirectory: './solution/Infra'
         commandOptions: 'tfplan'
         environmentServiceNameAzureRM: 'Azure subscription'
+        backendServiceArm: ''
+        backendAzureRmResourceGroupName: ''
+        backendAzureRmStorageAccountName: ''
+        backendAzureRmContainerName: ''
+        backendAzureRmKey: 'terraform.tfstate'
+        backendAWSBucketName: ''
+        backendAWSKey: ''
+        backendGCPBucketName: ''
+        backendGCPPrefix: ''
+        backendServiceAWS: ''
+        backendServiceGCP: ''
+
 
         
