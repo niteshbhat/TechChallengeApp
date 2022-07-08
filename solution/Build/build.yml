@@ -25,7 +25,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         containerRegistry: 'dockerRegistry'
-        repository: 'evila/az-test'
+        repository: 'evila/tech-challenge'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
