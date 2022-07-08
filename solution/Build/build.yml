@@ -87,8 +87,8 @@ stages:
     - task: TerraformTaskV1@0
       inputs:
         provider: 'azurerm'
-        command: 'init'
-        backendServiceArm: 'Azure subscription'
+        command: 'apply'
+        commandOptions: 'tfplan'       
         backendAzureRmResourceGroupName: 'TechChallengeApp'
         backendAzureRmStorageAccountName: 'restorestate'
         backendAzureRmContainerName: 'restorestate'
@@ -99,5 +99,8 @@ stages:
         backendGCPPrefix: ''
         backendServiceAWS: ''
         backendServiceGCP: ''
+        backendServiceArm: '' 
+
+        
 
  
