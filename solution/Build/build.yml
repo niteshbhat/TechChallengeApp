@@ -84,21 +84,13 @@ stages:
         backendServiceGCP: ''
         environmentServiceNameAzureRM: 'Azure subscription'
 
-    - task: TerraformTaskV3@3
+    - task: Terraform@1
       inputs:
-        provider: 'azurerm'
-        command: 'apply'
-        workingDirectory: './solution/Infra'
-        commandOptions: 'tfplan'
-        environmentServiceNameAzureRM: 'Azure subscription'
-        backendAzureRmResourceGroupName: 'TechChallengeApp'
-        backendAzureRmStorageAccountName: 'restorestate'
-        backendAzureRmContainerName: 'restorestate'
-        backendAzureRmKey: 'terraform.tfstate'
-        backendAWSBucketName: ''
-        backendAWSKey: ''
-        backendGCPBucketName: ''
-        backendGCPPrefix: ''
-        backendServiceAWS: ''
-        backendServiceGCP: '' 
-        backendServiceArm: 'Azure subscription'
+        TemplatePath: './solution/Infra'
+        Arguments: 'apply tfplan'
+        InstallTerraform: false
+        ManageState: true
+        ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
+        ConnectedServiceNameARM: 'Azure subscription'
+        StorageAccountRM: 'restorestate'
+        StorageContainerName: 'restorestate'
