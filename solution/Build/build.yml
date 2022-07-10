@@ -11,6 +11,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  PASSWORD : '${env:PASSWORD}'
 
 stages:
 - stage: Build
@@ -70,7 +71,7 @@ stages:
         provider: 'azurerm'
         command: 'plan'
         workingDirectory: './solution/Infra'
-        commandOptions: '-out=tfplan'
+        commandOptions:  -var='var.PASSWORD=$(PASSWORD)' -out=tfplan
         backendServiceArm: 'Azure subscription'
         backendAzureRmResourceGroupName: 'TechChallengeApp'
         backendAzureRmStorageAccountName: 'restorestate'

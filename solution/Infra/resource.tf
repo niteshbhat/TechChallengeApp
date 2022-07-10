@@ -18,7 +18,7 @@ resource "azurerm_container_group" "servian-az-aci" {
     memory = "1.5"
     secure_environment_variables = {
       "VTT_DBHOST"        = var.servian-aci["DbHost"]
-      "POSTGRES_PASSWORD" = var.PASSWORD
+      "POSTGRES_PASSWORD" = TF_VAR_PASSWORD
       "VTT_LISTENHOST"    = var.servian-aci["ListenHost"]
     }
 
@@ -32,7 +32,7 @@ resource "azurerm_container_group" "servian-az-aci" {
     commands = ["/bin/sh", "-c", "sleep 10 ;  ./TechChallengeApp updatedb; ./TechChallengeApp serve"]
     secure_environment_variables = {
       "VTT_DBHOST"     = var.servian-aci["DbHost"]
-      "VTT_DBPASSWORD" = var.PASSWORD
+      "VTT_DBPASSWORD" = TF_VAR_PASSWORD
       "VTT_LISTENPORT" = var.servian-aci["ListenPort"]
       "VTT_LISTENHOST" = var.servian-aci["ListenHost"]
     }
