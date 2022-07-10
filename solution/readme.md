@@ -37,6 +37,9 @@
  <img width="331" alt="image" src="https://user-images.githubusercontent.com/7299171/178063316-a9b032a3-a265-4da5-9738-c8562edc3419.png">
  <img width="314" alt="image" src="https://user-images.githubusercontent.com/7299171/178063363-d41f99b9-fc12-4b1e-824d-bd298b35a077.png">
 
+3. Created Container storage account to store the statefile for the terraform 
+<img width="754" alt="image" src="https://user-images.githubusercontent.com/7299171/178136582-307d5e43-9b68-41c1-a794-be2ea4743237.png">
+
 
 ### Description
 Here we are using Azure devOps Pipeline we are tring to use dockerfile to build the container image and upload the it in docker hub and in same pipeline we have added 
@@ -177,16 +180,15 @@ And using FQDN of Container instances we can access the application http://servi
 and health of application can be check http://servian-techchallenge.westus.azurecontainer.io/healthcheck/
 <img width="598" alt="image" src="https://user-images.githubusercontent.com/7299171/178065551-7c47d9f8-42b8-4ce2-ac71-657ee42d8ae6.png">
 
+### Future enhancement
+   - Implementing Hashicorp Vault 
+   - Implementing hashicorp consul
+   - Implementing Terraform project to configure conatiner storage and common resource group that will finally used in above flow.   - 
+   - Implementing different environment pipeline with destroy infra structure options  
+   - implementing different azure release implementation 
 
-
-
-
-
-
-
-
-**Issues and Pull requests should only be made for changes to the application code, not Tech Challenge Assessments.**
+** Issues and Pull requests should only be made for changes to the application code, not Tech Challenge Assessments.**
 
 Please explain the changes you made here.
 
-Fixes: [https://github.com/servian/TechChallengeApp/issues/{issue](https://github.com/servian/TechChallengeApp/issues/%7Bissue) number}
+Fixes: [https://github.com/servian/TechChallengeApp/issues/{issue](https://github.com/servian/TechChallengeApp/issues) number}

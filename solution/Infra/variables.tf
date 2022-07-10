@@ -1,9 +1,3 @@
-variable "PASSWORD" {
-  description = "Database administrator password"
-  type        = string
-  sensitive   = true
-}
-
 variable "rg_name" {
   description = "variable contain the name of resource group"
   type    = string
@@ -40,4 +34,3 @@ variable "servian-aci" {
     "ListenPort"       = "80"
   }
 }
-
